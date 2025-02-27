@@ -1,0 +1,361 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    flex-direction: row; 
+}
+
+.input-section, .response-section {
+    flex: 1;
+    padding: 20px;
+    background-color: #2d2d2d;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#promptInput, #responseArea {
+    width: 100%;
+    height: calc(100% - 50px);
+    padding: 15px;
+    border: 1px solid #404040;
+    border-radius: 5px;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-y: auto;
+}
+
+#promptInput {
+    resize: none;
+    margin-bottom: 10px;
+}
+
+#responseArea {
+    width: 100%;
+    height: calc(100% - 50px);
+    padding: 15px;
+    border: 1px solid #404040;
+    border-radius: 5px;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-y: auto;
+    margin-bottom: 0;
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #7289da;
+    font-size: 1.2rem;
+}
+
+.response-placeholder {
+    display: none;
+}
+
+.formatted-response {
+    height: 100%;
+    overflow-y: auto;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    margin: 0;
+}
+
+#promptInput:focus {
+    outline: none;
+    border-color: #666;
+}
+
+#sendButton {
+    padding: 12px 20px;
+    background-color: #7289da;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#sendButton:hover {
+    background-color: #5b6eae;
+}
+
+#responseArea {
+    white-space: pre-wrap;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #e0e0e0;
+}
+
+.error-message {
+    color: #ff6b6b;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 107, 107, 0.1);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #404040;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4a4a4a;
+}
+
+.formatted-response pre {
+    margin: 0;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #1e1e1e !important;
+    overflow-x: auto;
+}
+
+.formatted-response code {
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+}
+
+.formatted-response p code {
+    background-color: #333;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #e0e0e0;
+}
+
+.formatted-response blockquote {
+    border-left: 4px solid #7289da;
+    margin: 15px 0;
+    padding: 10px 20px;
+    background-color: #2a2a2a;
+    color: #bebebe;
+}
+
+.formatted-response ul, 
+.formatted-response ol {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.formatted-response table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.formatted-response th,
+.formatted-response td {
+    border: 1px solid #404040;
+    padding: 8px;
+    text-align: left;
+}
+
+.formatted-response th {
+    background-color: #333;
+}
+
+.formatted-response h1,
+.formatted-response h2,
+.formatted-response h3,
+.formatted-response h4 {
+    color: #7289da;
+    margin: 15px 0 10px 0;
+}
+
+.formatted-response a {
+    color: #7289da;
+    text-decoration: none;
+}
+
+.formatted-response a:hover {
+    text-decoration: underline;
+}
+
+.token.comment {
+    color: #6a9955;
+}
+
+.token.string {
+    color: #ce9178;
+}
+
+.token.number {
+    color: #b5cea8;
+}
+
+.token.keyword {
+    color: #569cd6;
+}
+
+.token.function {
+    color: #dcdcaa;
+}
+
+.copy-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #404040;
+    border: none;
+    color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.copy-button:hover {
+    background: #4a4a4a;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column; 
+    }
+
+    .input-section, .response-section {
+        flex: none;
+        width: 100%;
+        height: 50vh; 
+    }
+
+    .input-section {
+        border-right: none;
+        border-bottom: 1px solid #404040;
+    }
+
+    #promptInput {
+        height: calc(100% - 80px); 
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .formatted-response pre {
+        max-width: 100%;
+        font-size: 12px;
+    }
+
+    .copy-button {
+        top: 5px;
+        right: 5px;
+        padding: 3px 8px;
+        font-size: 10px;
+    }
+
+    .formatted-response table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .formatted-response blockquote {
+        margin: 10px 0;
+        padding: 5px 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #sendButton {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .formatted-response {
+        padding: 10px;
+    }
+
+    .formatted-response pre {
+        padding: 10px;
+        font-size: 11px;
+    }
+
+    #promptInput, #responseArea {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    .container {
+        flex-direction: row; 
+    }
+
+    .input-section, .response-section {
+        height: 100vh;
+        width: 50%;
+    }
+
+    .input-section {
+        border-right: 1px solid #404040;
+        border-bottom: none;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .container {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    #promptInput, #responseArea {
+        font-size: 18px;
+    }
+
+    .formatted-response pre {
+        font-size: 16px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .formatted-response pre {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    #sendButton {
+        min-height: 44px;
+    }
+
+    .copy-button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+/* Add these styles for the loading indicator */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #7289da;
+    font-style: italic;
+}
