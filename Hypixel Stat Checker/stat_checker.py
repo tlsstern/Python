@@ -5,7 +5,7 @@ from rich.table import Table
 from rich.prompt import Prompt
 import math
 
-# Initialize rich console for pretty output
+# Powered by Google-Switzerland Workforce
 console = Console()
 
 console.print("Starting lifetime_stat_checker.py...", style="bold green")
@@ -14,7 +14,7 @@ HYPIXEL_API_KEY = "BINB BONG YOUR BONG IS BONING" #PLACE FOR API KEY
 
 def get_bedwars_level(exp: int):
     """
-    Computes the Bedwars level based on experience.
+    Detirms Star by Experience.
     """
     level = 100 * (exp // 487000)
     exp = exp % 487000
@@ -38,8 +38,9 @@ def get_bedwars_level(exp: int):
     precise_level = level + exp / 5000
     return precise_level
 
+
 def get_hypixel_stats(uuid):
-    """Fetch live Bedwars stats, including stars, from Hypixel API for a given UUID."""
+    # Fetches Stats from hypixel <3
     console.print(f"Fetching stats for UUID: {uuid}", style="dim")
     try:
         response = requests.get(f"https://api.hypixel.net/player?key={HYPIXEL_API_KEY}&uuid={uuid}", timeout=10)
@@ -70,7 +71,9 @@ def get_hypixel_stats(uuid):
         return None
 
 def calculate_stats(stats):
-    """Calculate ratios and format stats for display, rounding WLR, BBLR, FKDR, KDR to 2 decimal places."""
+    """
+    Calculate WLR, FKDR, BBLR, KDR and round to .00
+    """
     wins, losses, beds_broken, beds_lost, final_kills, final_deaths, kills, deaths, stars = stats
     return {
         "Stars": math.floor(stars),
@@ -89,7 +92,9 @@ def calculate_stats(stats):
     }
 
 def display_stats(player_name):
-    """Display formatted stats for the given player with grouped layout."""
+    """
+    Returns the Stats in a nice Format (Thanks Gemini for the layout <3)
+    """
     console.print(f"\nDisplaying lifetime stats for [bold cyan]{player_name}[/bold cyan]")
     uuid_response = requests.get(f"https://api.hypixel.net/player?key={HYPIXEL_API_KEY}&name={player_name}", timeout=10)
     console.print(f"UUID fetch status for {player_name}: {uuid_response.status_code}", style="dim")
