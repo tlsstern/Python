@@ -10,7 +10,23 @@ console = Console()
 
 console.print("Starting lifetime_stat_checker.py...", style="bold green")
 
-HYPIXEL_API_KEY = "BINB BONG YOUR BONG IS BONING" #PLACE FOR API KEY  
+# Load Hypixel API key from key.txt
+def load_api_key():
+    """Load the Hypixel API key from key.txt."""
+    try:
+        with open("key.txt", "r") as f:
+            api_key = f.read().strip()  # Read and remove any whitespace/newlines
+            if not api_key:
+                raise ValueError("key.txt is empty")
+            return api_key
+    except FileNotFoundError:
+        console.print("Error: key.txt not found in the current directory.", style="red")
+        raise
+    except Exception as e:
+        console.print(f"Error reading key.txt: {e}", style="red")
+        raise
+
+HYPIXEL_API_KEY = load_api_key()  # Load the API key
 
 def get_bedwars_level(exp: int):
     """
@@ -37,7 +53,6 @@ def get_bedwars_level(exp: int):
     exp -= 7000
     precise_level = level + exp / 5000
     return precise_level
-
 
 def get_hypixel_stats(uuid):
     # Fetches Stats from hypixel <3
